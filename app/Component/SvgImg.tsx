@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CSSProperties } from "react";
 
 interface data {
   size: number;
@@ -6,9 +7,10 @@ interface data {
   alt?: string;
   objFit?: boolean;
   usrSlct?: boolean;
+  style?:CSSProperties;
 }
 
-const SvgImg = ({ size, src, alt, objFit, usrSlct }: data) => {
+const SvgImg = ({ size, src, alt, objFit, style, usrSlct }: data) => {
   let alts = "";
   let addedProperty: Record<string, string> = {};
   if (alt) {
@@ -40,7 +42,7 @@ const SvgImg = ({ size, src, alt, objFit, usrSlct }: data) => {
         style={{
           width: size + "rem",
           height: "auto",
-        }}
+     ...style   }}
       ></Image>
     </div>
   );

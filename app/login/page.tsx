@@ -54,10 +54,14 @@ const page = () => {
     <section className="flex min-h-screen bg-[position:calc(50%+100px)_center] w-full bg-cover bg-[url('/Image/bg-auth.png')] md:bg-[linear-gradient(180deg,#FFF_0%,var(--Cloud,#DAE0DA)_100%)] items-center md:items-start pt-6 px-5 md:px-12 pb-12 justify-center">
       <div className="flex flex-col w-full max-w-[90rem] items-center justify-center gap-12">
         <header className="hidden md:w-full md:flex md:justify-between md:gap-4">
-          <div className="flex gap-4 items-center cursor-pointer select-none">
-            <SvgImg size={4} src="/Image/logo.png" alt="Anas Burhanuddin Logo" />
+          <div className="flex gap-1 items-center cursor-pointer select-none">
+            <SvgImg
+              size={6}
+              src="/Image/logo.svg"
+              alt="Anas Burhanuddin Logo"
+            />
             <p className="text-2xl font-medium tracking-min-4 text-text">
-             Anas Burhanuddin
+              Anas Burhanuddin
             </p>
           </div>
           <Link
@@ -121,6 +125,10 @@ const page = () => {
                       src="/Icon/account_circle.svg"
                       size={1.6}
                       alt="Email icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <input
@@ -129,7 +137,7 @@ const page = () => {
                     name="email"
                     value={isForm.email}
                     placeholder="Email or Username"
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     onChange={(e) =>
                       setIsForm({ ...isForm, email: e.target.value })
                     }
@@ -150,6 +158,10 @@ const page = () => {
                       src="/Icon/lock.svg"
                       size={1.4}
                       alt="Password icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <input
@@ -158,7 +170,7 @@ const page = () => {
                     name="password"
                     value={isForm.password}
                     placeholder="Password"
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     onChange={(e) =>
                       setIsForm({ ...isForm, password: e.target.value })
                     }
@@ -177,7 +189,7 @@ const page = () => {
               <div className="w-full mt-5">
                 <button
                   type="submit"
-                  className={`flex w-full items-center justify-center text-xl font-medium tracking-[-0.4px] text-white rounded-xl px-5 py-2.5 ${!isLoading ? "bg-dark-green shadow-xs hover:bg-dark-green/90 hover:scale-101 transition-all duration-300 cursor-pointer select-none" : "bg-dark-green/50 cursor-not-allowed"}`}
+                  className={`flex w-full items-center justify-center text-xl font-medium tracking-[-0.4px] text-white rounded-xl px-5 py-2.5 ${!isLoading ? "bg-primary shadow-xs hover:bg-primary/90 hover:scale-101 transition-all duration-300 cursor-pointer select-none" : "bg-primary/50 cursor-not-allowed"}`}
                 >
                   {isLoading ? "Logging in..." : "Login"}
                 </button>

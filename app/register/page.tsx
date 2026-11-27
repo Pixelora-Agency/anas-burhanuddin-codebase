@@ -67,10 +67,14 @@ const page = () => {
     <section className="flex min-h-screen bg-[position:calc(50%+100px)_center] w-full bg-cover bg-[url('/Image/bg-auth.png')] md:bg-[linear-gradient(180deg,#FFF_0%,var(--Cloud,#DAE0DA)_100%)] items-center md:items-start pt-6 px-5 md:px-12 pb-12 justify-center">
       <div className="flex flex-col w-full max-w-[90rem] items-center justify-center gap-12">
         <header className="hidden md:w-full md:flex md:justify-between md:gap-4">
-          <div className="flex gap-4 items-center cursor-pointer select-none">
-            <SvgImg size={4} src="/Image/logo.png" alt="Anas Burhanuddin Logo" />
+          <div className="flex gap-1 items-center cursor-pointer select-none">
+            <SvgImg
+              size={6}
+              src="/Image/logo.svg"
+              alt="Anas Burhanuddin Logo"
+            />
             <p className="text-2xl font-medium tracking-min-4 text-text">
-              Anas Burhanaddin
+              Anas Burhanuddin
             </p>
           </div>
           <Link
@@ -132,6 +136,10 @@ const page = () => {
                       src="/Icon/account_circle.svg"
                       size={1.6}
                       alt="Email icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <input
@@ -143,7 +151,7 @@ const page = () => {
                     onChange={(e) =>
                       setIsForm({ ...isForm, name: e.target.value })
                     }
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     required
                   />
                 </div>
@@ -161,6 +169,10 @@ const page = () => {
                       src="/Icon/mark_email_unread.svg"
                       size={1.6}
                       alt="Email icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <input
@@ -172,7 +184,7 @@ const page = () => {
                     onChange={(e) =>
                       setIsForm({ ...isForm, email: e.target.value })
                     }
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-5 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     required
                   />
                 </div>
@@ -190,6 +202,10 @@ const page = () => {
                       src="/Icon/lock.svg"
                       size={1.4}
                       alt="Password icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <div className="absolute right-4 top-7 -translate-y-1/2 z-10">
@@ -216,7 +232,7 @@ const page = () => {
                       setIsForm({ ...isForm, pass: e.target.value });
                     }}
                     placeholder="Enter your password"
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-10 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-10 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     required
                   />
                 </div>
@@ -234,6 +250,10 @@ const page = () => {
                       src="/Icon/lock.svg"
                       size={1.4}
                       alt="Password icon"
+                      style={{
+                        filter:
+                          "brightness(0) saturate(100%) invert(76%) sepia(8%) saturate(568%) hue-rotate(339deg) brightness(91%) contrast(88%)",
+                      }}
                     />
                   </div>
                   <div className="absolute right-4 top-7 -translate-y-1/2 z-10">
@@ -260,7 +280,7 @@ const page = () => {
                     }
                     name="passwordconfirmation"
                     placeholder="Confirm your password"
-                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-10 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-dark-green"
+                    className="flex w-full items-center text-xl text-text rounded-xl pl-14 pr-10 py-2.5 bg-white shadow-xs border border-black/20 focus:outline-primary"
                     required
                   />
                 </div>
@@ -269,10 +289,10 @@ const page = () => {
                 <div className="flex flex-col gap-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <div
-                      className={`w-4 h-4 border ${isLengthValid ? "border-dark-green border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
+                      className={`w-4 h-4 border ${isLengthValid ? "border-primary border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
                     >
                       <Checked
-                        className={`${isLengthValid ? "text-dark-green" : "text-slate-400"} transition-colors duration-200`}
+                        className={`${isLengthValid ? "text-primary" : "text-slate-400"} transition-colors duration-200`}
                         strokeWidth={isLengthValid ? 3 : 2}
                       />
                     </div>
@@ -283,10 +303,10 @@ const page = () => {
 
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <div
-                      className={`w-4 h-4 border ${isHasNumber ? "border-dark-green border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
+                      className={`w-4 h-4 border ${isHasNumber ? "border-primary border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
                     >
                       <Checked
-                        className={`${isHasNumber ? "text-dark-green" : "text-slate-400"} transition-colors duration-200`}
+                        className={`${isHasNumber ? "text-primary" : "text-slate-400"} transition-colors duration-200`}
                         strokeWidth={isHasNumber ? 3 : 2}
                       />
                     </div>
@@ -297,10 +317,10 @@ const page = () => {
                 <div className="flex flex-col gap-3">
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <div
-                      className={`w-4 h-4 border ${isHasUppercase ? "border-dark-green border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
+                      className={`w-4 h-4 border ${isHasUppercase ? "border-primary border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
                     >
                       <Checked
-                        className={`${isHasUppercase ? "text-dark-green" : "text-slate-400"} transition-colors duration-200`}
+                        className={`${isHasUppercase ? "text-primary" : "text-slate-400"} transition-colors duration-200`}
                         strokeWidth={isHasUppercase ? 3 : 2}
                       />
                     </div>
@@ -311,10 +331,10 @@ const page = () => {
 
                   <label className="flex items-center gap-3 cursor-pointer group">
                     <div
-                      className={`w-4 h-4 border ${isHasSpecial ? "border-dark-green border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
+                      className={`w-4 h-4 border ${isHasSpecial ? "border-primary border-2" : "border-slate-400"} rounded-[4px] flex items-center justify-center transition-colors duration-200`}
                     >
                       <Checked
-                        className={`${isHasSpecial ? "text-dark-green" : "text-slate-400"} transition-colors duration-200`}
+                        className={`${isHasSpecial ? "text-primary" : "text-slate-400"} transition-colors duration-200`}
                         strokeWidth={isHasSpecial ? 3 : 2}
                       />
                     </div>
@@ -341,8 +361,8 @@ const page = () => {
                     !isHasSpecial ||
                     !isSame ||
                     isLoading
-                      ? "bg-dark-green/50 cursor-not-allowed"
-                      : "bg-dark-green hover:bg-dark-green/90 hover:scale-101"
+                      ? "bg-primary/50 cursor-not-allowed"
+                      : "bg-primary hover:bg-primary/90 hover:scale-101"
                   }`}
                 >
                   {isLoading ? "Creating Account..." : "Create Account"}
