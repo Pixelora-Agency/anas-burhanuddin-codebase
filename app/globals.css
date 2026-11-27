@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+:root {
+  --background: linear-gradient(180deg, #fff 0%, var(--Cloud, #dae0da) 100%);
+  --foreground: #171717;
+  /* --background: var(--background); */
+  --text: #1e1e1a;
+  --gray: #41403b;
+  --primary: #BDB0A7;
+  --dark-primary:#7e756f;
+  --dark-primary-800:#493f33;
+  --secondary: #4B4B4B;
+  --cloud: #dae0da;
+  --yellow: #e0ca5f;
+  --darker-green: #0f291c;
+  --white-gray: #f5f5f5;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-text: var(--text);
+  --color-gray: var(--gray);
+  --color-primary: var(--primary);
+  --color-dark-primary: var(--dark-primary);
+   --color-dark-primary-800: var(--dark-primary-800);
+   --color-secondary: var(--secondary);
+  --color-cloud: var(--cloud);
+  --color-yellow: var(--yellow);
+  --color-darker-green: var(--darker-green);
+  --color-white-gray: var(--white-gray);
+  --tracking-min-4: -4%;
+  --tracking-min-2: -2%;
+  --leading-c-120: 120%;
+  --leading-c-150: 150%;
+  --leading-c-180: 180%;
+}
+
+body {
+  background: var(--dark-primary-800);
+}
+
+body > div {
+  background: var(--background);
+  background-attachment: fixed;
+  color: var(--text);
+  padding: 1.5rem 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  border-bottom-left-radius: 4rem;
+  border-bottom-right-radius: 4rem;
+  min-width: 0;
+  /* overflow: hidden; */
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,24 @@
+name: anas-burhanuddin
+
+services:
+  mysql:
+    image: mysql:8.0.40
+    container_name: anas-burhanuddin-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 6OnI_And_c1OUd
+      MYSQL_DATABASE: anas-burhanuddin
+      MYSQL_USER: fikri
+      MYSQL_PASSWORD: junIOr_fE_l
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysql","ping","-h","localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    
+volumes:
+  mysql_data:

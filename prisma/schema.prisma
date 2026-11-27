@@ -1,0 +1,281 @@
+generator client {
+  provider   = "prisma-client"
+  output     = "../app/generated/prisma"
+  engineType = "client"
+  runtime    = "workerd"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+}
+
+model User {
+  id                String              @id @default(uuid())
+  name              String
+  photo             String
+  status            String              @default("public")
+  arab_status       String              @default("عام")
+  created_at        DateTime            @default(now())
+  bio               String              @default("good day")
+  arab_bio          String              @default("يوم جيد")
+  email             String              @unique
+  pass              String
+  article_comments  ArticleComments[]
+  fatwa_comments    FatwaComments[]
+  lectures_comments LecturesComments[]
+  lessons_comments  LessonsComments[]
+  loginVerification LoginVerification[]
+  session           Session[]
+  user_lessons      UserLessons[]
+}
+
+model Session {
+  id         Int      @id @default(autoincrement())
+  user_id    String
+  hash_token String   @unique
+  expires_at DateTime
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, hash_token])
+  @@index([user_id])
+}
+
+model RegisterVerification {
+  id         Int      @id @default(autoincrement())
+  hash_token String   @unique
+  name       String
+  email      String
+  pass       String
+  expires_at DateTime
+
+  @@unique([email, expires_at])
+  @@index([email])
+  @@index([expires_at])
+}
+
+model LoginVerification {
+  id         Int      @id @default(autoincrement())
+  user_id    String
+  hash_token String   @unique
+  expires_at DateTime
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, expires_at])
+  @@index([user_id])
+}
+
+model Verse {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+}
+
+model WorshipSchedule {
+  id            Int      @id @default(autoincrement())
+  image         String
+  english_title String
+  arab_title    String
+  speaker       String
+  time_start    DateTime
+  time_end      DateTime
+}
+
+model Lessons {
+  id              Int               @id @default(autoincrement())
+  image           String
+  category        LessonsCategory
+  english_title   String
+  english_chapter String
+  english_content String
+  arab_title      String
+  arab_chapter    String
+  arab_content    String
+  author          String
+  time_start      DateTime
+  time_end        DateTime
+  visitor         Int
+  read_time       Int
+  lessons_comment LessonsComments[]
+  user_lessons    UserLessons[]
+
+  @@index([visitor])
+  @@index([read_time])
+}
+
+model UserLessons {
+  id         Int     @id @default(autoincrement())
+  user_id    String
+  lessons_id Int
+  progress   Decimal @db.Decimal(3, 2)
+  lessons    Lessons @relation(fields: [lessons_id], references: [id], onDelete: Cascade)
+  user       User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, lessons_id])
+  @@index([user_id])
+  @@index([lessons_id])
+}
+
+model LessonsComments {
+  id         Int      @id @default(autoincrement())
+  user_id    String
+  lessons_id Int
+  comment    String
+  image      String   @default("/Placeholder/profile_image.jpeg")
+  created_at DateTime @default(now())
+  lessons    Lessons  @relation(fields: [lessons_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@index([lessons_id])
+}
+
+model Article {
+  id                  Int               @id @default(autoincrement())
+  english_title       String
+  english_description String
+  english_content     String
+  arab_title          String
+  arab_description    String
+  arab_content        String
+  created_at          DateTime          @default(now())
+  duration            Int
+  visitor             Int
+  read_time           Int
+  image               String            @default("/Placeholder/event_image.png")
+  article_comments    ArticleComments[]
+}
+
+model ArticleComments {
+  id         Int      @id @default(autoincrement())
+  user_id    String
+  article_id Int
+  comment    String
+  created_at DateTime @default(now())
+  article    Article  @relation(fields: [article_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@index([article_id])
+  @@index([created_at])
+}
+
+model Lectures {
+  id                  Int                @id @default(autoincrement())
+  english_title       String
+  english_description String
+  arab_title          String
+  arab_description    String
+  created_at          DateTime           @default(now())
+  duration            Int
+  visitor             Int
+  image               String             @default("/Placeholder/event_image.png")
+  lectures_comment    LecturesComments[]
+}
+
+model LecturesComments {
+  id          Int      @id @default(autoincrement())
+  user_id     String
+  lectures_id Int
+  comment     String
+  image       String   @default("/Placeholder/profile_image.jpeg")
+  created_at  DateTime @default(now())
+  lectures    Lectures @relation(fields: [lectures_id], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@index([lectures_id])
+  @@index([created_at])
+}
+
+model Fatwa {
+  id              Int             @id @default(autoincrement())
+  english_title   String
+  english_desc    String
+  english_content String
+  arab_title      String
+  arab_desc       String
+  arab_content    String
+  questioner      String
+  image           String          @default("/Placeholder/event_image.png")
+  visitor         Int
+  read_time       Int
+  duration        Int
+  created_at      DateTime        @default(now())
+  fatwa_comments  FatwaComments[]
+}
+
+model FatwaComments {
+  id         Int      @id @default(autoincrement())
+  user_id    String
+  fatwa_id   Int
+  comment    String
+  image      String   @default("/Placeholder/profile_image.jpeg")
+  created_at DateTime @default(now())
+  fatwa      Fatwa    @relation(fields: [fatwa_id], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [user_id], references: [id])
+
+  @@index([user_id])
+  @@index([fatwa_id])
+  @@index([created_at])
+}
+
+model EBook {
+  id             Int            @id @default(autoincrement())
+  english_title  String
+  english_desc   String
+  english_author String
+  english_page   Json
+  arab_title     String
+  arab_desc      String
+  arab_author    String
+  arab_page      Json
+  created_at     DateTime       @default(now())
+  image          String
+  chapter        EbookChapter[]
+}
+
+model EbookChapter {
+  id                    Int    @id @default(autoincrement())
+  ebook_id              Int
+  english_chapter_tag   String
+  english_chapter_title String
+  english_page_number   Int
+  arab_chapter_tag      String
+  arab_chapter_title    String
+  arab_page_number      Int
+  ebook                 EBook  @relation(fields: [ebook_id], references: [id], onDelete: Cascade)
+
+  @@index([ebook_id])
+}
+
+model Live {
+  id            Int        @id @default(autoincrement())
+  english_title String
+  arab_title    String
+  image         String     @default("/Placeholder/event_image.png")
+  link          String     @db.VarChar(255)
+  status        LiveStatus
+  date          DateTime
+  type          LiveType
+}
+
+enum LessonsCategory {
+  Aqidah         @map("aqidah")
+  Hadith         @map("hadith")
+  Fiqh           @map("fiqh")
+  Interpretation @map("interpretation")
+  Morals         @map("morals")
+  Arabic         @map("arabic")
+}
+
+enum LiveStatus {
+  Ended      @map("ended")
+  Live       @map("live")
+  ComingSoon @map("comingSoon")
+}
+
+enum LiveType {
+  Video @map("video")
+  Sound @map("sound")
+}
